@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #000000;
+  --surface: #0A0A0A;
+  --surface2: #111111;
+  --border: #2A2A2A;
+  --border-bright: #FFFFFF;
+  --ink: #FFFFFF;
+  --ink-muted: #888888;
+  --ink-dim: #444444;
+  --silver: #C0C0C0;
+  --silver-bright: #E8E8E8;
+  --accent: #FFFFFF;
+  --accent-soft: #1A1A1A;
+}
+
+* { box-sizing: border-box; }
+body { background: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; overflow-x: hidden; }
+.font-serif { font-family: 'Playfair Display', serif; }
+.font-mono { font-family: 'Space Mono', monospace; }
+
+/* Ver. C ornate border treatment */
+.ornate-border {
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 0 0 1px #ffffff22, inset 0 0 0 1px #ffffff11;
+}
+
+/* Star glow */
+.star-glow {
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.8)) drop-shadow(0 0 12px rgba(255,255,255,0.4));
+}
+
+/* Silver shimmer text */
+.silver-text {
+  background: linear-gradient(135deg, #888 0%, #fff 40%, #ccc 60%, #888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Starburst / 4-point star like Ver. C */
+.starburst::before {
+  content: '✦';
+  color: #fff;
+}
+
+/* Ring holes — white on black */
+.ring-hole {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: #000;
+  border: 2px solid #444;
+  box-shadow: inset 0 1px 3px rgba(255,255,255,0.1);
+}
+
+/* Animations */
+@keyframes space-float {
+  0%   { transform: translateY(0px) rotate(-0.5deg); }
+  33%  { transform: translateY(-10px) rotate(0.5deg); }
+  66%  { transform: translateY(-5px) rotate(-0.3deg); }
+  100% { transform: translateY(0px) rotate(-0.5deg); }
+}
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.1; transform: scale(0.8); }
+  50%       { opacity: 1; transform: scale(1.3); }
+}
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes starburst-pulse {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+  50%       { transform: scale(1.4) rotate(45deg); opacity: 1; }
+}
+@keyframes unroll {
+  from { clip-path: inset(0 0 100% 0); transform: scaleY(0); opacity: 0.5; }
+  to   { clip-path: inset(0 0 0% 0); transform: scaleY(1); opacity: 1; }
+}
+@keyframes sticker-pop {
+  0%   { transform: scale(0) rotate(-15deg); }
+  70%  { transform: scale(1.15) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+@keyframes page-curl {
+  0%   { transform: perspective(1200px) rotateY(0deg); }
+  100% { transform: perspective(1200px) rotateY(-180deg); }
+}
+
+.space-float  { animation: space-float 8s ease-in-out infinite; }
+.star-twinkle { animation: star-twinkle var(--dur, 3s) ease-in-out infinite; animation-delay: var(--delay, 0s); }
+.cd-spin      { animation: spin 4s linear infinite; }
+.sticker-pop  { animation: sticker-pop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+.play-card:hover .card-arrow { opacity: 1; }
+
+/* Ver. C decorative corner marks */
+.ver-c-frame {
+  position: relative;
+}
+.ver-c-frame::before, .ver-c-frame::after {
+  content: '';
+  position: absolute;
+  width: 16px; height: 16px;
+  border-color: #fff;
+  border-style: solid;
+}
+.ver-c-frame::before { top: 4px; left: 4px; border-width: 2px 0 0 2px; }
+.ver-c-frame::after  { bottom: 4px; right: 4px; border-width: 0 2px 2px 0; }
+
+/* Dotted star border like Ver. C outer frame */
+.star-border {
+  border: 1px solid #333;
+  background-image:
+    repeating-linear-gradient(90deg, #ffffff22 0, #ffffff22 2px, transparent 0, transparent 20px),
+    repeating-linear-gradient(180deg, #ffffff22 0, #ffffff22 2px, transparent 0, transparent 20px);
+}
+
+/* Paper/lined texture for notebook interior */
+.paper-lines {
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent, transparent 27px,
+    #ffffff08 27px, #ffffff08 28px
+  );
+}
+
+/* Galaxy layered background */
+.galaxy-bg {
+  background:
+    radial-gradient(ellipse 800px 500px at 15% 40%, rgba(60, 20, 120, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 400px at 80% 25%, rgba(20, 10, 80, 0.15) 0%, transparent 55%),
+    radial-gradient(ellipse 500px 700px at 60% 75%, rgba(40, 15, 100, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 900px 300px at 40% 90%, rgba(30, 10, 70, 0.1) 0%, transparent 60%),
+    #000010;
+}
+
+/* Milky way sweep */
+.milky-way {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 40% at 50% 50%, rgba(100, 60, 180, 0.04) 0%, transparent 70%);
+  transform: rotate(-25deg);
+  pointer-events: none;
+}
+
+/* Star layers — tiny, medium, bright */
+@keyframes twinkle-a {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 1; }
+}
+@keyframes twinkle-b {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.05; }
+}
